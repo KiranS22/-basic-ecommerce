@@ -1,23 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
-import { useState, useContext } from "react";
-import { QuantityContext } from "../Components/App/App";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCartCount } from "../../Redux/features/slices/cartSlice";
 
-const Navbar = ({ products, filteredProducts, setFilteredProducts }) => {
-  const { cartCount, setCartCount } = useContext(QuantityContext);
-  console.log(cartCount);
-
+const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const cartCount = useSelector(selectCartCount);
+  console.log("I a cart count", cartCount);
 
   const searchProducts = (e) => {
     setSearchTerm(e.target.value);
     // setFilteredProducts(products.filter(item => item.includes(e.target.value)))
-    setFilteredProducts(
-      products.filter((item) =>
-        item.title.toLowerCase().includes(e.target.value)
-      )
-    );
+    //   setFilteredProducts(
+    //     products.filter((item) =>
+    //       item.title.toLowerCase().includes(e.target.value)
+    //     )
+    //   );
   };
 
   return (
@@ -50,7 +50,7 @@ const Navbar = ({ products, filteredProducts, setFilteredProducts }) => {
             src="https://img.icons8.com/material-outlined/24/000000/shopping-cart--v1.png"
             style={{ width: 30, height: 30 }}
           />
-          <span className="cart-count">{cartCount}</span>
+          <span className="cart-count"> {cartCount} </span>
         </Link>
       </button>
     </nav>

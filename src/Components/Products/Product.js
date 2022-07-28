@@ -1,10 +1,12 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { QuantityContext } from "../App/App";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../Redux/features/slices/cartSlice";
 
-const Product = ({ product, cart, setCart }) => {
-  const { cartCount, setCartCount } = useContext(QuantityContext);
+
+const Product = ({product}) => {
+  const dispatch = useDispatch()
   const [heart, setHeart] = useState(false);
   let unlikedImgSrc =
     "https://img.icons8.com/material-outlined/24/000000/like--v1.png";
@@ -15,35 +17,11 @@ const Product = ({ product, cart, setCart }) => {
     setHeart(!heart);
   };
 
-  const addToCart = (product) => {
+  const addingToCart = (product) => {
+    dispatch(addToCart(product))
+   console.log(product);
+  }
 
-    //If product already exists in the cart or not.
-    //If it exists, increment its quantity
-    // else push that product
-    //find method
-    //find method will return the item which satisfies the condition.
-    if (cart.find((item) => item.id === product.id)) {
-      setCart(
-        cart.map((item) => {
-          if (item.id === product.id) {
-            //Increment the quantity
-            return { ...item, quantity: item.quantity + 1 };
-          } else {
-            return { ...item };
-
-            //return object
-          }
-        })
-      );
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-
-    // cartCount = cartCount + 1
-    setCartCount(cartCount + 1)
-
-    //else push product in cart arr.
-  };
   return (
     <>
       <div className="product flex justify-center align-center">
@@ -61,7 +39,7 @@ const Product = ({ product, cart, setCart }) => {
         </div>
         <div className="extra-info flex">
           <span className="add-cart">
-            <button type="button" onClick={() => addToCart(product)}>
+            <button type="button" onClick={() => addingToCart(product)}>
               {" "}
               Add To Cart{" "}
             </button>
@@ -80,7 +58,7 @@ const Product = ({ product, cart, setCart }) => {
             />
           </div>
         </div>
-      </div>
+       </div>
     </>
   );
 };

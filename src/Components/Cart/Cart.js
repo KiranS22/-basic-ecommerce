@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "../Cart-Item/CartItem";
+import { useSelector } from "react-redux";
+import {
+  selectCart,
+  selectCartCount,
+} from "../../Redux/features/slices/cartSlice";
 
 const Cart = () => {
+  const cart = useSelector(selectCart);
+  console.log("I am cart being recived from selector ", cart);
+
+  const cartCount = useSelector(selectCartCount);
 
   useEffect(() => {
     // findcartTotal();
@@ -24,9 +33,10 @@ const Cart = () => {
             <h1>Your Cart</h1>
           </div>
           <ul className="items">
-            {/* {cart.map((item) => {
-              return <CartItem/>;
-            })} */}
+            {cart.map((item) => {
+              console.log("I am an item from map", item);
+              return <CartItem item={item} />;
+            })}
 
             {/* <li className="grid_4 item">
               <a href="#" className="btn-remove">
