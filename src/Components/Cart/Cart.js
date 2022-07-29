@@ -8,7 +8,7 @@ import {
 
 const Cart = () => {
   const cart = useSelector(selectCart);
-  console.log("I am cart being recived from selector ", cart);
+  //console.log("I am cart being recived from selector ", cart);
 
   const cartCount = useSelector(selectCartCount);
 
@@ -35,7 +35,7 @@ const Cart = () => {
           <ul className="items">
             {cart.map((item) => {
               console.log("I am an item from map", item);
-              return <CartItem item={item} />;
+              return <CartItem item={item} key={item.id} />;
             })}
 
             {/* <li className="grid_4 item">

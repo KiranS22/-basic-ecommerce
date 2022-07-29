@@ -1,9 +1,4 @@
-// // If product already exists in the cart or not.
-// // If it exists, increment its quantity
-// // else push that product
-// // find method
-// //find method will return the item which satisfies the condition.
-//
+  
 
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -16,26 +11,16 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      // console.log(" I am action.payload " + action.payload);
+       console.log(" I am action.payload " , action.payload);
       // console.log("AddToCart Action");
-
-      if (state.cart.find((item) => item.id === action.payload.id)) {
-        state.cart = state.cart.map((item) => {
-          if (item.id === action.payload.id) {
-            //Increment the quantity
-            return item.quantity++;
-          } else {
-            return item;
-
-            //return object
-          }
-        });
+      let item = state.cart.find((item) => item.id === action.payload.id);
+      if (item) {
+        item.quantity = item.quantity + 1 ;
       } else {
-        state.cart.push({ ...action.payload, quantity: 1 });
+        state.cart.push({...action.payload, quantity: 1 });
       }
       state.cartCount++;
-      // console.log('I am state.cart from cartSlice',state.cart);
-
+      //console.log('I am state.cart from cartSlice', state.cart);
       //else push product in cart arr.
     },
     deleteFromCart: (state, action) => {
@@ -52,8 +37,11 @@ const cartSlice = createSlice({
 });
 
 export const { addToCart, deleteFromCart } = cartSlice.actions;
-export const selectCartCount = (state) => state.cart.cartCount;
-export const selectCart = (state) => state.cart.cart;
+export const selectCartCount = (state) =>  state.cart.cartCount;
+export const selectCart = (state) => {
+  //console.log(state.cart.cart)
+  return state.cart.cart
+} ;
 export const selectCartTotal = (state) => state.cart.cartTotal;
 
 export default cartSlice.reducer;
