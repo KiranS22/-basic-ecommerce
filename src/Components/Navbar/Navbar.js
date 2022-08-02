@@ -2,22 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./nav.css";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCartCount } from "../../Redux/features/slices/cartSlice";
+import { filterSearch } from "../../Redux/features/slices/productSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const cartCount = useSelector(selectCartCount);
-  console.log("I a cart count", cartCount);
 
   const searchProducts = (e) => {
     setSearchTerm(e.target.value);
-    // setFilteredProducts(products.filter(item => item.includes(e.target.value)))
-    //   setFilteredProducts(
-    //     products.filter((item) =>
-    //       item.title.toLowerCase().includes(e.target.value)
-    //     )
-    //   );
+    dispatch(filterSearch(e.target.value));
   };
 
   return (
@@ -50,7 +46,9 @@ const Navbar = () => {
             src="https://img.icons8.com/material-outlined/24/000000/shopping-cart--v1.png"
             style={{ width: 30, height: 30 }}
           />
-          <span className="cart-count"> {cartCount} </span>
+          {cartCount > 0 ? (
+            <span className="cart-count"> {cartCount} </span>
+          ) : null}
         </Link>
       </button>
     </nav>

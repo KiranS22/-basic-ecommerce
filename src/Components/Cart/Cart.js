@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
 import CartItem from "../Cart-Item/CartItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   selectCart,
   selectCartCount,
+  selectCartTotal,
+  findCartItemsTotal,
 } from "../../Redux/features/slices/cartSlice";
 
 const Cart = () => {
   const cart = useSelector(selectCart);
   //console.log("I am cart being recived from selector ", cart);
-
+  const dispatch = useDispatch();
   const cartCount = useSelector(selectCartCount);
+  const cartTotal = useSelector(selectCartTotal);
 
   useEffect(() => {
-    // findcartTotal();
-  }, []);
-  // const findcartTotal = () => {
-  //   let cartTotal = 0;
-  //   //Run a Loop.
-  //   cart.forEach((element) => {
-  //     cartTotal += element.price * element.quantity;
-  //   });
-
-  //   console.log(`Cart Total is ${cartTotal}`);
-  //   setcartItemsTotal(cartTotal.toFixed(2)); //11.22
-  // };
+    dispatch(findCartItemsTotal());
+  }, [cart]);
+  //
   return (
     <>
       <div className="cart">
@@ -34,82 +28,8 @@ const Cart = () => {
           </div>
           <ul className="items">
             {cart.map((item) => {
-              console.log("I am an item from map", item);
               return <CartItem item={item} key={item.id} />;
             })}
-
-            {/* <li className="grid_4 item">
-              <a href="#" className="btn-remove">
-                <i className="far fa-trash-alt"></i>
-              </a>
-              <div className="preview">
-                <img src="https://assets.cookfood.net/product_811.jpg" />
-              </div>
-              <div className="details" data-price="2.49">
-                <h3>Garlic Ciabatta</h3>
-                <p>Serves 4</p>
-              </div>
-              <div className="inner_container">
-                <div className="col_1of2 align-center picker">
-                  <p>
-                    <a href="#" className="btn-quantity plus">
-                      <i className="fas fa-plus"></i>
-                    </a>
-                    <div className="col_1of2 quantity-text">
-                      <p>
-                        <span className="current_quantity">1</span> @ £2.49
-                      </p>
-                    </div>
-                    <a href="#" className="btn-quantity minus">
-                      <i className="fas fa-minus"></i>
-                    </a>
-                  </p>
-                  <input
-                    type="hidden"
-                    className="quantity_field"
-                    name="quantity"
-                    data-price="2.49"
-                    value="1"
-                  />
-                </div>
-              </div>
-            </li>
-            <li className="grid_4 item">
-              <a href="#" className="btn-remove">
-                <i className="far fa-trash-alt"></i>
-              </a>
-              <div className="preview">
-                <img src="https://assets.cookfood.net/product_1504.jpg" />
-              </div>
-              <div className="details" data-price="8.50">
-                <h3>White Chocolate & Raspberry Cheesecake</h3>
-                <p>Serves 6 (550g)</p>
-              </div>
-              <div className="inner_container">
-                <div className="col_1of2 align-center picker">
-                  <p>
-                    <a href="#" className="btn-quantity plus">
-                      <i className="fas fa-plus"></i>
-                    </a>
-                    <div className="col_1of2 quantity-text">
-                      <p>
-                        <span className="current_quantity">1</span> @ £8.50
-                      </p>
-                    </div>
-                    <a href="#" className="btn-quantity minus">
-                      <i className="fas fa-minus"></i>
-                    </a>
-                  </p>
-                  <input
-                    type="hidden"
-                    className="quantity_field"
-                    name="quantity"
-                    data-price="8.50"
-                    value="1"
-                  />
-                </div>
-              </div>
-            </li> */}
           </ul>
           <div className="grid_12 delivery-payment">
             <div className="grid_6 delivery-address">
@@ -145,7 +65,7 @@ const Cart = () => {
                 </div>
                 <div className="col_1of2">
                   <div className="total">
-                    {/* <span className="amount">£{cartItemsTotal}</span> */}
+                    <span className="amount">£{cartTotal}</span>
                   </div>
                 </div>
               </div>

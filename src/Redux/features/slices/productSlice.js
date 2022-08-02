@@ -2,11 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // First, create the thunk
-export const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
-  const response = await axios.get("https://fakestoreapi.com/products");
+export const fetchProducts = createAsyncThunk(
+  "products/fetchProducts",
+  async () => {
+    const response = await axios.get("https://fakestoreapi.com/products");
 
-  return response.data;
-});
+    return response.data;
+  }
+);
 
 const productSlice = createSlice({
   name: "products",
@@ -16,7 +19,13 @@ const productSlice = createSlice({
     filteredProducts: [],
   },
 
-  reducers: {},
+  reducers: {
+    filterSearch: (state, action) => {
+      state.filteredProducts = state.products.filter((item) =>
+        item.title.toLowerCase().includes(action.payload.toLowerCase())
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.isLoading = true;
@@ -25,19 +34,17 @@ const productSlice = createSlice({
       state.isLoading = false;
 
       state.products = action.payload;
-      console.log( 'this is origional products ' + state.products);
       state.filteredProducts = action.payload;
-      console.log( 'this is filtered products '+ state.filteredProducts);
     });
 
     builder.addCase(fetchProducts.rejected, (state) => {
       state.isLoading = true;
-      console.log("Data has been rejected");
     });
   },
 });
 
- export const selectFilteredProducts = state => state.products.filteredProducts
-export const {} = productSlice.actions;
+export const selectFilteredProducts = (state) =>
+  state.products.filteredProducts;
+export const { filterSearch } = productSlice.actions;
 
 export default productSlice.reducer;

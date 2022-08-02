@@ -5,7 +5,6 @@ import "./details.css";
 
 function ProductDetails({ products }) {
   const [required, setRequired] = useState({});
-  console.log(required);
   const { id } = useParams();
   useEffect(() => {
     setRequired(products.find((product) => product.id === Number(id)));
