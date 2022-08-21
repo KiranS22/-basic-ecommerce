@@ -10,15 +10,13 @@ import {
 
 const Cart = () => {
   const cart = useSelector(selectCart);
-  //console.log("I am cart being recived from selector ", cart);
+
   const dispatch = useDispatch();
-  const cartCount = useSelector(selectCartCount);
   const cartTotal = useSelector(selectCartTotal);
 
   useEffect(() => {
     dispatch(findCartItemsTotal());
   }, [cart]);
-  //
   return (
     <>
       <div className="cart">

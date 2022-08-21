@@ -7,7 +7,7 @@ import {
 } from "../../Redux/features/slices/cartSlice";
 import "../Cart/cart.css";
 import { useSelector, useDispatch } from "react-redux";
-// Two things that must be there on a React input field: value, onChange
+
 const CartItem = ({ item }) => {
   const cart = useSelector(selectCart);
 
