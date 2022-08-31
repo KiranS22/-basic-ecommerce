@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
   return (
     <>
       <section className="vh-100">
@@ -45,27 +49,31 @@ const Login = () => {
                 </div>
 
                 <div className="form-outline mb-4">
+                  <label className="form-label" htmlFor="email">
+                    Email address
+                  </label>
                   <input
                     type="email"
                     id="email"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
+                    value={user.email}
+                    onChange={(e)=>setUser({...user, email: e.target.value}) }
                   />
-                  <label className="form-label" htmlFor="email">
-                    Email address
-                  </label>
                 </div>
 
                 <div className="form-outline mb-3">
+                  <label className="form-label" htmlFor="password">
+                    Password
+                  </label>
                   <input
                     type="password"
                     id="password"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    value={user.password}
+                    onChange={(e)=>setUser({...user, password: e.target.value}) }
                   />
-                  <label className="form-label" htmlFor="password">
-                    Password
-                  </label>
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">

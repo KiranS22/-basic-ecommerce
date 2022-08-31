@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../Register/form.css";
 
 const Register = () => {
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    verifyPassword: "",
+    telNumber: "",
+    city: "",
+    country: "",
+  });
+
+  const handleSubmit = e=>{
+    e.preventDefault()
+  }
   return (
     <>
       <section className="vh-100">
@@ -16,7 +30,7 @@ const Register = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form>
+              <form onSubmit={(e)=> handleSubmit(e) }>
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                   <p className="lead fw-normal mb-0 me-3">Registwe with</p>
                   <button
@@ -54,6 +68,10 @@ const Register = () => {
                     id="fname"
                     className="form-control form-control-lg"
                     placeholder="Enter your First Name"
+                    value={user.firstName}
+                    onChange={(e) =>
+                      setUser({ ...user, firstName: e.target.value })
+                    }
                   />
                 </div>
 
@@ -66,6 +84,10 @@ const Register = () => {
                     id="lname"
                     className="form-control form-control-lg"
                     placeholder="Enter your Last Name"
+                    value={user.lastName}
+                    onChange={(e) =>
+                      setUser({ ...user, lastName: e.target.value })
+                    }
                   />
                 </div>
                 <div className="form-outline mb-3">
@@ -77,6 +99,10 @@ const Register = () => {
                     id="email"
                     className="form-control form-control-lg"
                     placeholder="Enter a valid email address"
+                    value={user.email}
+                    onChange={(e) =>
+                      setUser({ ...user, email: e.target.value })
+                    }
                   />
                 </div>
 
@@ -89,6 +115,10 @@ const Register = () => {
                     id="password"
                     className="form-control form-control-lg"
                     placeholder="Enter password"
+                    value={user.password}
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })
+                    }
                   />
                 </div>
 
@@ -102,6 +132,10 @@ const Register = () => {
                     className="form-control form-control-lg"
                     placeholder="Enter password"
                     minLength="6"
+                    value={user.verifyPassword}
+                    onChange={(e) =>
+                      setUser({ ...user, verifyPassword: e.target.value })
+                    }
                   />
                 </div>
 
@@ -114,6 +148,10 @@ const Register = () => {
                     id="verify-country"
                     className="form-control form-control-lg"
                     placeholder="Country"
+                    value={user.country}
+                    onChange={(e) =>
+                      setUser({ ...user, country: e.target.value })
+                    }
                   />
                 </div>
 
@@ -126,6 +164,8 @@ const Register = () => {
                     id="city"
                     className="form-control form-control-lg"
                     placeholder="city"
+                    value={user.city}
+                    onChange={(e) => setUser({ ...user, city: e.target.value })}
                   />
                 </div>
 
@@ -138,7 +178,10 @@ const Register = () => {
                     id="tel"
                     className="form-control form-control-lg"
                     placeholder="Enter mobile Number"
-                    minLength="6"
+                    value={user.telNumber}
+                    onChange={(e) =>
+                      setUser({ ...user, telNumber: e.target.value })
+                    }
                   />
                 </div>
 
