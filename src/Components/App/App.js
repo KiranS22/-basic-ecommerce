@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import Cart from "../Cart/Cart";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../Redux/features/slices/productSlice";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +23,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );

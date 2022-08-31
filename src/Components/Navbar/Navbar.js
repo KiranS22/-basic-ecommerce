@@ -51,6 +51,11 @@ const Navbar = () => {
           ) : null}
         </Link>
       </button>
+      <div>
+        <button type="button">Register</button>
+
+        <button type="button">Log In</button>
+      </div>
     </nav>
   );
 };
