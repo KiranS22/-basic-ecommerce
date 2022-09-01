@@ -52,9 +52,12 @@ const Navbar = () => {
         </Link>
       </button>
       <div>
-        <button type="button">Register</button>
+        <Link to="/register"><button type="button">Register</button> </Link>
 
-        <button type="button">Log In</button>
+        <Link to="/login"><button type="button">Log In </button> </Link>
+        
+
+     
       </div>
     </nav>
   );
