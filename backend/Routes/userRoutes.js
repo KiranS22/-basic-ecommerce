@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 userRouter.post(".register", async (req, res) => {
-  const { firstNae, lastName, password, email, city, country, telNumber } =
+  const { firstName, lastName, password, email, city, country, tel } =
     req.body;
 
   const userExists = users.find((user) => user.email == email);
@@ -18,13 +18,13 @@ userRouter.post(".register", async (req, res) => {
   } else {
     users.push({
       id: users.length + 1,
-      firstNae,
+      firstName,
       lastName,
       password: hashedPass,
       email,
       city,
       country,
-      telNumber,
+      tel,
     });
 
     res.send({ status: "success", message: "user registered" });

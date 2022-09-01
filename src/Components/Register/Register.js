@@ -1,22 +1,35 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Register/form.css";
+import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     verifyPassword: "",
-    telNumber: "",
+    tel: "",
     city: "",
     country: "",
   });
 
-  const handleSubmit = e=>{
-    e.preventDefault()
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (user.password !== user.verifyPassword) {
+      alert("Passwords Must Match");
+    } else {
+      const response = await axios.post("http://localhost:4000/register", user);
+
+      const status = response.data.status;
+      if (status === "success") {
+        navigate("/login");
+      }
+    }
+  };
+
   return (
     <>
       <section className="vh-100">
@@ -30,7 +43,7 @@ const Register = () => {
               />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form onSubmit={(e)=> handleSubmit(e) }>
+              <form onSubmit={(e) => handleSubmit(e)} method="POST">
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                   <p className="lead fw-normal mb-0 me-3">Registwe with</p>
                   <button
@@ -59,35 +72,37 @@ const Register = () => {
                   <p className="text-center fw-bold mx-3 mb-0">Or</p>
                 </div>
 
-                <label className="form-label" htmlFor="fname">
+                <label className="form-label" htmlFor="firstName">
                   First Name:
                 </label>
                 <div className="form-outline mb-4">
                   <input
                     type="text"
-                    id="fname"
+                    id="firstName"
                     className="form-control form-control-lg"
                     placeholder="Enter your First Name"
                     value={user.firstName}
                     onChange={(e) =>
                       setUser({ ...user, firstName: e.target.value })
                     }
+                    name="firstName"
                   />
                 </div>
 
                 <div className="form-outline mb-3">
-                  <label className="form-label" htmlFor="lname">
+                  <label className="form-label" htmlFor="lastName">
                     Last Name:
                   </label>
                   <input
                     type="text"
-                    id="lname"
+                    id="lastName"
                     className="form-control form-control-lg"
                     placeholder="Enter your Last Name"
                     value={user.lastName}
                     onChange={(e) =>
                       setUser({ ...user, lastName: e.target.value })
                     }
+                    name="lastName"
                   />
                 </div>
                 <div className="form-outline mb-3">
@@ -103,6 +118,7 @@ const Register = () => {
                     onChange={(e) =>
                       setUser({ ...user, email: e.target.value })
                     }
+                    name="email"
                   />
                 </div>
 
@@ -119,6 +135,7 @@ const Register = () => {
                     onChange={(e) =>
                       setUser({ ...user, password: e.target.value })
                     }
+                    name="password"
                   />
                 </div>
 
@@ -136,6 +153,7 @@ const Register = () => {
                     onChange={(e) =>
                       setUser({ ...user, verifyPassword: e.target.value })
                     }
+                    name="verify-password"
                   />
                 </div>
 
@@ -145,7 +163,8 @@ const Register = () => {
                   </label>
                   <input
                     type="text"
-                    id="verify-country"
+                    id="country"
+                    name="country"
                     className="form-control form-control-lg"
                     placeholder="Country"
                     value={user.country}
@@ -162,6 +181,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="city"
+                    name="city"
                     className="form-control form-control-lg"
                     placeholder="city"
                     value={user.city}
@@ -180,9 +200,10 @@ const Register = () => {
                     placeholder="Enter mobile Number"
                     value={user.telNumber}
                     onChange={(e) =>
-                      setUser({ ...user, telNumber: e.target.value })
+                      setUser({ ...user, tel: e.target.value })
                     }
                   />
+
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">
