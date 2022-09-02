@@ -23,13 +23,12 @@ const Product = ({ product }) => {
   return (
     <>
       <div className="product flex justify-center align-center">
-        <h2 className="center-text">{product.title}</h2>
+        <h2 className=" my-title center-text">{product.title}</h2>
         <img
           src={product.image}
           className="product-img justify-center"
           alt={product.title}
         />
-        <p className="desc"> {product.description}</p>
         <div className="price">
           <div id="price">
             <p>&#163;{product.price}</p>

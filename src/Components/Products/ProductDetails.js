@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./details.css";
 
 function ProductDetails({ products }) {
+  console.log(products);
   const [required, setRequired] = useState({});
   const { id } = useParams();
   useEffect(() => {

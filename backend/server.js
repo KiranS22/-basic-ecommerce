@@ -56,23 +56,28 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  console.log(`Users in login route ${users}`);
   const { email, password } = req.body;
   const foundUserInDB = users.find((user) => user.email == email);
+  console.log(foundUserInDB);
   if (foundUserInDB) {
     const validPass = await bcrypt.compare(password, foundUserInDB.password);
     if (validPass) {
       req.session.authenticated = true;
-      req.session.users = {
+      req.session.user = {
         email,
-        password,
       };
-      return res.redirect("/");
+      res.send({ status: "success", message: "user autheticated" });
+    } else {
+      res.send({
+        status: "error",
+        message: "user with these credentails not found",
+      });
     }
   }
-  res.status(500).send("Bad Request");
 });
 
 app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}`);
 });
+
+console.log();

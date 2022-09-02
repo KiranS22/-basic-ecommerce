@@ -26,10 +26,6 @@ const Navbar = () => {
         <li className="nav-link">
           <Link to="/"> Home</Link>
         </li>
-
-        <li className="nav-link">
-          <Link to="/contact"> Contact Us</Link>
-        </li>
       </ul>
       <div className="search">
         <input
@@ -52,12 +48,17 @@ const Navbar = () => {
         </Link>
       </button>
       <div>
-        <Link to="/register"><button type="button">Register</button> </Link>
+        <Link to="/register">
+          <button type="button" className="register-btn">
+            Register
+          </button>{" "}
+        </Link>
 
-        <Link to="/login"><button type="button">Log In </button> </Link>
-        
-
-     
+        <Link to="/login">
+          <button type="button" className="login-btn">
+            Log In{" "}
+          </button>{" "}
+        </Link>
       </div>
     </nav>
   );

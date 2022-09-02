@@ -32,9 +32,7 @@ html{
 }
 
 .product{
-  flex-direction: column;white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  flex-direction: column;
   margin: 5px 8px;
   border: 1.5px solid var(--col1);
   border-radius: 5px;
@@ -57,4 +55,41 @@ html{
 
 .flex-between{
   justify-content: space-between;
+}
+
+.login-btn, .register-btn {
+  color: #ffffff;
+  padding: 8px 12px;
+  font-size: 18px;
+}
+
+.login-btn{
+  background-color: navy;
+  border:1px solid  navy;
+}
+.register-btn{
+  background-color: black;
+  border:1px solid  black;
+}
+
+.login-btn:hover{
+  color: navy;
+  background-color: #ffffff;
+  transition: .3s ease-in-out;
+  border: 1px solid white;
+}
+.register-btn:hover{
+  color: black;
+  background-color: #ffffff;
+  transition: .4s ease-in-out;
+  border: 1px solid white;
+}
+
+.my-title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 270px;
+  font-size: 16px;
+
 }

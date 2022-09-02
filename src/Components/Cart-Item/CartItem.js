@@ -15,6 +15,8 @@ const CartItem = ({ item }) => {
   const [itemQuantity, setItemQuantity] = useState(item.quantity);
 
   const updateCartQuantity = (e, id) => {
+    console.log("update cart quantity is running");
+    console.log(e.target.value, id);
     setItemQuantity(e.target.value);
     dispatch(updateQty({ id: id, value: e.target.value }));
 
@@ -28,9 +30,7 @@ const CartItem = ({ item }) => {
   return (
     <>
       <li className="grid_4 item">
-        <a href="#" className="btn-remove">
-          <i className="far fa-trash-alt"></i>
-        </a>
+        <a href="#" className="btn-remove"></a>
         <div className="preview">
           <img src={item.image} />
         </div>
@@ -43,13 +43,16 @@ const CartItem = ({ item }) => {
             type="number"
             min={1}
             onChange={(e) => updateCartQuantity(e, item.id)}
-            className="form-control"
+            className="form-control w-25"
             value={itemQuantity}
           />
           <p>£{(item.price * itemQuantity).toFixed(2)}</p>
-          <button onClick={() => deleteItem(item.id)} type="button">
-            Delete
-          </button>
+          <i
+            className="far fa-trash-alt"
+            onClick={() => deleteItem(item.id)}
+            type="button"
+            style={{ color: "red", fontSize: "25px" }}
+          ></i>
         </div>
       </li>
     </>

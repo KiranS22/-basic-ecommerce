@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     console.log("submitHnadler has ran");
     e.preventDefault();
@@ -9,6 +10,7 @@ const Login = () => {
     const status = response.data.status;
     if (status === "success") {
       console.log("response.data frontend", response.data);
+      navigate("/");
     }
   };
 
@@ -70,7 +72,6 @@ const Login = () => {
                     value={user.email}
                     onChange={(e) =>
                       setUser({ ...user, email: e.target.value })
-                      
                     }
                     name="email"
                   />
